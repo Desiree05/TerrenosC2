@@ -1,0 +1,43 @@
+
+<div class="w3-container w3-green " xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+  <a href="#"><i class="w3-xxxlarge w3-right fa fa-home"></i></a>
+  <h2>Consultar Arrendatario</h2>
+</div>
+
+<div class="w3-margin">
+  <input id="input_id" class="w3-input w3-margin w3-half" type="text" name="texto" placeholder="DNI del arrendatario" [(ngModel)]="DNI">
+
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <button id="botonConsultar" class="w3-btn w3-hover-green w3-blue-grey w3-margin w3-left" (click)="consultarArrendatario()">Consultar Arrendatario</button>
+
+  <div *ngIf="encontrado == true">
+    <table class="w3-table w3-striped w3-center">
+      <tr>
+        <th>DNI</th>
+        <th>{{arrendatarioEncontrado.DNI}}</th>
+      </tr>
+      <tr>
+        <td>Nombre</td>
+        <td>{{arrendatarioEncontrado.nombre}}</td>
+      </tr>
+      <tr>
+        <td>Apellido</td>
+        <td>{{arrendatarioEncontrado.apellido}}</td>
+      </tr>
+      <tr>
+        <td>Correo Electrónico</td>
+        <td>{{arrendatarioEncontrado.email}}</td>
+      </tr>
+      <tr>
+        <td>Edad</td>
+        <td>{{arrendatarioEncontrado.edad}}</td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+

@@ -18,6 +18,10 @@ import { ParcelaVerComponent } from './parcela-ver/parcela-ver.component';
 import { ParcelaCrearComponent } from './parcela-crear/parcela-crear.component';
 import { ParcelaEliminarComponent } from './parcela-eliminar/parcela-eliminar.component';
 import { ParcelaModificarComponent } from './parcela-modificar/parcela-modificar.component';
+import { ArrendatarioCrearComponent } from './arrendatario-crear/arrendatario-crear.component';
+import { ArrendatarioEliminarComponent } from './arrendatario-eliminar/arrendatario-eliminar.component';
+import { ArrendatarioVerComponent } from './arrendatario-ver/arrendatario-ver.component';
+import { ArrendatarioModificarComponent } from './arrendatario-modificar/arrendatario-modificar.component';
 
 const appRoutes:Routes = [
   {path:'', component: HomeComponent},
@@ -34,6 +38,11 @@ const appRoutes:Routes = [
   {path:'parcelas/modificar', component: ParcelaModificarComponent},
   {path:'parcelas/ver', component: ParcelaVerComponent},
   {path:'parcelas/eliminar', component: ParcelaEliminarComponent},
+
+  {path:'arrendatarios/crear', component: ArrendatarioCrearComponent},
+  {path:'arrendatarios/modificar', component: ArrendatarioModificarComponent},
+  {path:'arrendatarios/ver', component: ArrendatarioVerComponent},
+  {path:'arrendatarios/eliminar', component: ArrendatarioEliminarComponent},
 
 
 ];
@@ -52,7 +61,12 @@ const appRoutes:Routes = [
     ParcelaVerComponent,
     ParcelaCrearComponent,
     ParcelaEliminarComponent,
-    ParcelaModificarComponent
+    ParcelaModificarComponent,
+    ArrendatarioCrearComponent,
+    ArrendatarioEliminarComponent,
+    ArrendatarioVerComponent,
+    ArrendatarioModificarComponent,
+
   ],
   imports: [
     BrowserModule,

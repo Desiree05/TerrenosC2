@@ -2,6 +2,7 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Terreno} from "./classTerreno.model";
 import {Parcela} from "./classParcela.model";
+import {Arrendatario} from "./classArrendatario.model";
 
 @Injectable()
 export class DataServices{
@@ -64,6 +65,38 @@ export class DataServices{
     await this.httpCliente.delete(url).subscribe(
 
       response => console.log("Parcela eliminada " + response),
+      error => console.log("Ha habido un error " + error)
+
+    );
+
+  }
+
+
+  //ARRENDATARIOS
+
+  async cargarArrendatarios(){
+    return this.httpCliente.get("https://terrenos-1eb68-default-rtdb.europe-west1.firebasedatabase.app/arrendatarios.json");
+  }
+
+  async guardarArrendatarios(arrendatario: Arrendatario, DNI:String){
+
+    let url = "https://terrenos-1eb68-default-rtdb.europe-west1.firebasedatabase.app/arrendatarios/" + DNI + ".json";
+
+    await this.httpCliente.put(url, arrendatario).subscribe(
+
+      response => console.log("Guardado arrendatario " + response),
+      error => console.log("Ha habido un error " + error)
+
+    );
+  }
+
+  async eliminarArrendatarios(DNI:String){
+
+    let url = "https://terrenos-1eb68-default-rtdb.europe-west1.firebasedatabase.app/arrendatarios/" + DNI + ".json";
+
+    await this.httpCliente.delete(url).subscribe(
+
+      response => console.log("Arrendatario eliminado " + response),
       error => console.log("Ha habido un error " + error)
 
     );

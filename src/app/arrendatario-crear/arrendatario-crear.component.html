@@ -1,0 +1,39 @@
+<body>
+
+<div class="w3-container w3-green " xmlns="http://www.w3.org/1999/html">
+  <a href="#"><i class="w3-xxxlarge w3-right fa fa-home"></i></a>
+  <h2>Crear Arrendatario</h2>
+</div>
+
+
+
+<form class="w3-container w3-margin">
+
+  <label class="w3-text-black"><b>DNI (con letra)</b></label>
+  <input id="DNI" class="w3-input w3-border w3-light-grey" required="required" name="DNI" type="text" [(ngModel)]="DNI">
+
+  <div class="w3-row-padding">
+    <div class="w3-half">
+      <label class="w3-text-black"><b>Nombre</b></label>
+      <input id="nombre" class="w3-input w3-border" required="required" type="text" name="nombre" placeholder="Nombre" [(ngModel)]="nombre">
+    </div>
+    <div class="w3-half">
+      <label class="w3-text-black"><b>Apellidos</b></label>
+      <input id="apellidos" class="w3-input w3-border" required="required" type="text" name="apellidos" placeholder="Apellidos" [(ngModel)]="apellido">
+    </div>
+  </div>
+
+  <label class="w3-text-black"><b>Correo electrónico</b></label>
+  <input id="email" class="w3-input w3-border w3-light-grey" required="required" name="email" type="text" [(ngModel)]="email">
+
+  <label class="w3-text-black"><b>Edad (debes de ser mayor de edad)</b></label>
+  <input id="edad" class="w3-input w3-border w3-light-grey" required="required" name="edad" type="number" [(ngModel)]="edad">
+
+
+  <br>
+
+  <button id="botonRegistro" class="w3-btn w3-hover-green w3-blue-grey w3-right w3-margin" (click)="registrarArrendatarios()">Registrar Arrendatario</button>
+</form>
+
+
+</body>
