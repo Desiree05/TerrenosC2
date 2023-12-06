@@ -1,0 +1,44 @@
+<body>
+
+<div class="w3-container w3-green " xmlns="http://www.w3.org/1999/html">
+  <a href="#"><i class="w3-xxxlarge w3-right fa fa-home"></i></a>
+  <h2>Registrar Alquiler</h2>
+</div>
+
+
+<form class="w3-container w3-margin">
+
+  <label class="w3-text-black"><b>DNI del arrendatario (con letra)</b></label>
+  <input id="DNI" class="w3-input w3-border w3-light-grey" required="required" name="DNI" type="text" [(ngModel)]="DNI">
+
+  <br>
+
+  <label class="w3-text-black"><b>Id de la parcela a alquilar</b></label>
+  <input id="input_id" class="w3-input w3-border" type="number" name="texto" placeholder="id de la parcela" [(ngModel)]="idParcela">
+
+  <br>
+
+  <div class="w3-row-padding">
+    <div class="w3-half">
+      <label class="w3-text-black"><b>Fecha de inicio del alquiler</b></label>
+      <input id="input_fechaI" class="w3-input w3-border" type="text" name="texto" placeholder="dd-mm-aaaa" [(ngModel)]="fechaInicio">
+    </div>
+    <div class="w3-half">
+      <label class="w3-text-black"><b>Periodo del alquiler</b></label>
+      <input id="input_periodo" class="w3-input w3-border" type="text" name="texto" placeholder="dd-mm-aaaa" [(ngModel)]="periodo">
+    </div>
+  </div>
+
+  <br>
+
+  <label class="w3-text-black"><b>Importe del alquiler mensual</b></label>
+  <input id="input_importe" class="w3-input w3-border" type="number" name="texto" placeholder="importe" [(ngModel)]="importe">
+
+
+  <br>
+
+  <button id="botonRegistro" class="w3-btn w3-hover-green w3-blue-grey w3-right w3-margin" (click)="registrarAlquiler()">Registrar Alquiler</button>
+</form>
+
+
+</body>

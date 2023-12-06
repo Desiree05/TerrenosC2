@@ -22,6 +22,7 @@ import { ArrendatarioCrearComponent } from './arrendatario-crear/arrendatario-cr
 import { ArrendatarioEliminarComponent } from './arrendatario-eliminar/arrendatario-eliminar.component';
 import { ArrendatarioVerComponent } from './arrendatario-ver/arrendatario-ver.component';
 import { ArrendatarioModificarComponent } from './arrendatario-modificar/arrendatario-modificar.component';
+import { AlquilerComponent } from './alquiler/alquiler.component';
 
 const appRoutes:Routes = [
   {path:'', component: HomeComponent},
@@ -44,6 +45,7 @@ const appRoutes:Routes = [
   {path:'arrendatarios/ver', component: ArrendatarioVerComponent},
   {path:'arrendatarios/eliminar', component: ArrendatarioEliminarComponent},
 
+  {path:'alquiler', component: AlquilerComponent},
 
 ];
 
@@ -66,6 +68,7 @@ const appRoutes:Routes = [
     ArrendatarioEliminarComponent,
     ArrendatarioVerComponent,
     ArrendatarioModificarComponent,
+    AlquilerComponent,
 
   ],
   imports: [
