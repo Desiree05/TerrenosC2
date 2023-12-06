@@ -1,0 +1,59 @@
+<div class="w3-container w3-green " xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+  <a href="#"><i class="w3-xxxlarge w3-right fa fa-home"></i></a>
+  <h2>Modificar Terreno</h2>
+</div>
+
+<input id="input_id" class="w3-input w3-margin" type="text" name="texto" [(ngModel)]="id">
+
+<button id="botonModificar" class="w3-btn w3-hover-green w3-blue-grey w3-margin" (click)="visuarlizarTerreno(id)">Modificar Terreno</button>
+
+<div *ngIf="encontrado == true">
+
+  <form class="w3-container w3-margin">
+
+    <label class="w3-text-black"><b>Ubicación (coordenadas)</b></label>
+
+    <div class="w3-row-padding">
+      <div class="w3-half">
+        <input id="latitud" class="w3-input w3-border" required="required" type="number" name="latitud" placeholder="{{latitud}}" [(ngModel)]="latitud">
+      </div>
+      <div class="w3-half">
+        <input id="longitud" class="w3-input w3-border" required="required" type="number" name="longitud" placeholder="Longitud" [(ngModel)]="longitud">
+      </div>
+    </div>
+
+
+    <label class="w3-text-black"><b>Tamaño (hectáreas)</b></label>
+    <input id="tamano" class="w3-input w3-border w3-light-grey" required="required" name="tamano" type="number" [(ngModel)]="tamano">
+
+
+    <label class="w3-text-black"><b>Límites (descripción)</b></label>
+
+    <div class="w3-row-padding">
+      <input id="limite_x" class="w3-input w3-border" required="required" name="limites" type="text" placeholder="Un rio, un camino, etc." [(ngModel)]="limites">
+    </div>
+
+
+    <!--div *ngIf="esFinca; else elseBlock">
+      <input id="boton_fincaON" class="w3-radio w3-margin" type="radio" name="tipo" value="finca" checked="checked" [(ngModel)]="esFinca">
+      <label>Finca</label>
+      <input id="boton_latifundioOFF" class="w3-radio w3-margin" type="radio" name="tipo" value="latifundio" [(ngModel)]="esLatifundio">
+      <label>Latifundio</label>
+    </div>
+
+    <ng-template #elseBlock>
+      <input id="boton_fincaOFF" class="w3-radio w3-margin" type="radio" name="tipo" value="finca" [(ngModel)]="esFinca">
+      <label>Finca</label>
+      <input id="boton_latifundioON" class="w3-radio w3-margin" type="radio" name="tipo" checked="checked" value="latifundio" [(ngModel)]="esLatifundio">
+      <label>Latifundio</label>
+    </ng-template-->
+
+
+    <br>
+
+    <button id="botonRegistro" class="w3-btn w3-hover-green w3-blue-grey w3-right w3-margin" (click)="guardarModificacionesTerreno(id)">Guardar modificaciones</button>
+  </form>
+
+
+
+</div>

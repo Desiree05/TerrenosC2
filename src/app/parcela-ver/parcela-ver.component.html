@@ -1,0 +1,50 @@
+
+<div class="w3-container w3-green " xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+  <a href="#"><i class="w3-xxxlarge w3-right fa fa-home"></i></a>
+  <h2>Consultar Parcela</h2>
+</div>
+
+<div class="w3-margin">
+  <input id="input_id" class="w3-input w3-margin w3-half" type="number" name="texto" placeholder="id del terreno" [(ngModel)]="id">
+  <input id="input_nParcela" class="w3-input w3-margin w3-half" type="number" name="texto" placeholder="numero de la parcela" [(ngModel)]="nParcela">
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <button id="botonConsultar" class="w3-btn w3-hover-green w3-blue-grey w3-margin w3-left" (click)="consultarParcela()">Consultar Parcela</button>
+
+  <div *ngIf="encontrado == true">
+    <table class="w3-table w3-striped w3-center">
+      <tr>
+        <th>id</th>
+        <th>{{parcelaEncontrada.id}}</th>
+      </tr>
+      <tr>
+        <td>Latitud</td>
+        <td>{{parcelaEncontrada.latitud}}</td>
+      </tr>
+      <tr>
+        <td>Longitud</td>
+        <td>{{parcelaEncontrada.longitud}}</td>
+      </tr>
+      <tr>
+        <td>Tamaño</td>
+        <td>{{parcelaEncontrada.tamano}}</td>
+      </tr>
+      <tr>
+        <td>Limites</td>
+        <td>{{parcelaEncontrada.limites}}</td>
+      </tr>
+      <tr>
+        <td>Disponibilidad</td>
+        <td>{{parcelaEncontrada.disponibilidad}}</td>
+      </tr>
+    </table>
+  </div>
+
+</div>

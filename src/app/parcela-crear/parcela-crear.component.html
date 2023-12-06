@@ -1,0 +1,50 @@
+<div class="w3-container w3-green " xmlns="http://www.w3.org/1999/html">
+  <a href="#"><i class="w3-xxxlarge w3-right fa fa-home"></i></a>
+  <h2>Crear Parcela</h2>
+</div>
+
+
+
+<form class="w3-container w3-margin">
+
+  <label class="w3-text-black"><b>Datos respecto al terreno al que pertenece la parcela a crear</b></label>
+
+  <div class="w3-row-padding">
+    <div class="w3-half">
+      <input id="idTerreno" class="w3-input w3-border" required="required" type="number" name="idTerreno" placeholder="Id del Terreno al que pertenece" [(ngModel)]="idTerreno">
+    </div>
+    <div class="w3-half">
+      <input id="nParcela" class="w3-input w3-border" required="required" type="number" name="nParcela" placeholder="Número de la parcela" [(ngModel)]="nParcela">
+    </div>
+  </div>
+
+  <label class="w3-text-black"><b>Ubicación (coordenadas)</b></label>
+
+  <div class="w3-row-padding">
+    <div class="w3-half">
+      <input id="latitud" class="w3-input w3-border" required="required" type="number" name="latitud" placeholder="Latitud" [(ngModel)]="latitud">
+    </div>
+    <div class="w3-half">
+      <input id="longitud" class="w3-input w3-border" required="required" type="number" name="longitud" placeholder="Longitud" [(ngModel)]="longitud">
+    </div>
+  </div>
+
+
+  <label class="w3-text-black"><b>Tamaño (hectáreas)</b></label>
+  <input id="tamano" class="w3-input w3-border w3-light-grey" required="required" name="tamano" type="number" [(ngModel)]="tamano">
+
+
+  <label class="w3-text-black"><b>Límites (descripción)</b></label>
+
+  <div class="w3-row-padding">
+    <input id="limite_x" class="w3-input w3-border" required="required" name="limites" type="text" placeholder="Un rio, un camino, etc." [(ngModel)]="limites">
+  </div>
+
+
+  <input id="boton_disponible" class="w3-radio w3-margin" type="checkbox" name="tipo" value="finca" [(ngModel)]="disponibilidad">
+  <label>Disponible</label>
+
+  <br>
+
+  <button id="botonRegistro" class="w3-btn w3-hover-green w3-blue-grey w3-right w3-margin" (click)="registrarParcela()">Registrar Parcela</button>
+</form>

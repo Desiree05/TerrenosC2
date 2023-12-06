@@ -1,0 +1,12 @@
+<div class="w3-container w3-green " xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+  <a href="#"><i class="w3-xxxlarge w3-right fa fa-home"></i></a>
+  <h2>Eliminar Terreno</h2>
+</div>
+
+<input id="input_id" class="w3-input w3-margin" type="text" name="texto" [(ngModel)]="id">
+
+<button id="botonConsultar" class="w3-btn w3-hover-green w3-blue-grey w3-margin" (click)="consultarTerreno(id)">Eliminar Terreno</button>
+
+<div *ngIf="encontrado == true">
+  <p>Terreno con id: {{id}} eliminado con éxito</p>
+</div>
