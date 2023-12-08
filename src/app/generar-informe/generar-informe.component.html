@@ -1,0 +1,84 @@
+
+<div class="w3-container w3-green " xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+  <a href="#"><i class="w3-xxxlarge w3-right fa fa-home"></i></a>
+  <h2>Generar Informe</h2>
+</div>
+
+<div class="w3-margin">
+  <input id="input_id" class="w3-input w3-margin w3-half" type="text" name="texto" placeholder="DNI del arrendatario" [(ngModel)]="searchDNI">
+
+
+  <button id="botonConsultar" class="w3-btn w3-hover-green w3-blue-grey w3-margin w3-left" (click)="consultarArrendatario()">Buscar Arrendatario</button>
+
+  <br>
+  <br>
+  <br>
+
+  <div *ngIf="encontrado == true">
+
+    <h3>Datos del arrendatario:</h3>
+
+    <table class="w3-table w3-striped w3-center">
+      <tr>
+        <th>DNI</th>
+        <th>{{arrendatarioEncontrado.DNI}}</th>
+      </tr>
+      <tr>
+        <td>Nombre</td>
+        <td>{{arrendatarioEncontrado.nombre}}</td>
+      </tr>
+      <tr>
+        <td>Apellido</td>
+        <td>{{arrendatarioEncontrado.apellido}}</td>
+      </tr>
+      <tr>
+        <td>Correo Electrónico</td>
+        <td>{{arrendatarioEncontrado.email}}</td>
+      </tr>
+      <tr>
+        <td>Edad</td>
+        <td>{{arrendatarioEncontrado.edad}}</td>
+      </tr>
+    </table>
+
+    <button id="botonConfirmar" class="w3-btn w3-hover-green w3-blue-grey w3-margin w3-left" (click)="consultarAlquileresDeArrendatario()">Generar Informe con este Arrendatario</button>
+
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  <div *ngIf="alquileresEncontrado == true">
+
+    <h3>Pagos Realizados:</h3>
+    <div *ngFor="let alquiler of alquilerFinds">
+      <h4>Alquiler {{alquiler.idAlquiler}}:</h4>
+
+      <table class="w3-table w3-striped w3-center">
+        <tr>
+          <th>Parcela</th>
+          <th>{{alquiler.idParcela}}</th>
+        </tr>
+        <tr>
+          <td>Fecha inicio</td>
+          <td>{{alquiler.fechaInicio}}</td>
+        </tr>
+        <tr>
+          <td>Fecha fin</td>
+          <td>{{alquiler.periodo}}</td>
+        </tr>
+        <tr>
+          <td>Importe</td>
+          <td>{{alquiler.importe}}</td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div>
+
+
+
+</div>
+
