@@ -23,6 +23,9 @@ import { ArrendatarioEliminarComponent } from './arrendatario-eliminar/arrendata
 import { ArrendatarioVerComponent } from './arrendatario-ver/arrendatario-ver.component';
 import { ArrendatarioModificarComponent } from './arrendatario-modificar/arrendatario-modificar.component';
 import { AlquilerComponent } from './alquiler/alquiler.component';
+import { GestionDeRecibosComponent } from './gestion-de-recibos/gestion-de-recibos.component';
+import { GenerarInformeComponent } from './generar-informe/generar-informe.component';
+import {CommonModule} from "@angular/common";
 
 const appRoutes:Routes = [
   {path:'', component: HomeComponent},
@@ -47,6 +50,10 @@ const appRoutes:Routes = [
 
   {path:'alquiler', component: AlquilerComponent},
 
+  {path:'gestion', component: GestionDeRecibosComponent},
+  {path:'gestion/generarInforme', component: GenerarInformeComponent},
+
+
 ];
 
 @NgModule({
@@ -69,6 +76,8 @@ const appRoutes:Routes = [
     ArrendatarioVerComponent,
     ArrendatarioModificarComponent,
     AlquilerComponent,
+    GestionDeRecibosComponent,
+    GenerarInformeComponent,
 
   ],
   imports: [
@@ -76,7 +85,8 @@ const appRoutes:Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [DataServices],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import {Terreno} from "./classTerreno.model";
 import {Parcela} from "./classParcela.model";
 import {Arrendatario} from "./classArrendatario.model";
+import {Alquiler} from "./classAlquiler.model";
 
 @Injectable()
 export class DataServices{
@@ -101,6 +102,26 @@ export class DataServices{
 
     );
 
+  }
+
+
+  //ALQUILER
+
+
+  async cargarAlquiler(){
+    return this.httpCliente.get("https://terrenos-1eb68-default-rtdb.europe-west1.firebasedatabase.app/alquileres.json");
+  }
+
+  async guardarAlquiler(alquiler: Alquiler, id:String){
+
+    let url = "https://terrenos-1eb68-default-rtdb.europe-west1.firebasedatabase.app/alquileres/" + id + ".json";
+
+    await this.httpCliente.put(url, alquiler).subscribe(
+
+      response => console.log("Guardado alquiler " + response),
+      error => console.log("Ha habido un error " + error)
+
+    );
   }
 
 }
