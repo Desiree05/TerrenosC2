@@ -47,4 +47,11 @@
   <br>
 
   <button id="botonRegistro" class="w3-btn w3-hover-green w3-blue-grey w3-right w3-margin" (click)="registrarParcela()">Registrar Parcela</button>
+
 </form>
+
+<div *ngIf="imprimirID == true">
+  <p class="w3-left-align w3-margin w3-padding">La parcela se ha creado con éxito. Identificador de la parcela: {{id}}</p>
+</div>
+
+

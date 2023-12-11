@@ -13,6 +13,7 @@ export class TerrenoCrearComponent{
 
   esFinca:boolean = false;
   esLatifundio:boolean = false;
+  imprimirID:boolean = false;
 
   id:number=0;
   latitud:number;
@@ -30,6 +31,8 @@ export class TerrenoCrearComponent{
 
 
   async registrarTerreno() {
+
+    this.imprimirID = false;
 
      (await this.dataService.cargarTerrenos()).subscribe(
       terrenos => {
@@ -54,7 +57,9 @@ export class TerrenoCrearComponent{
       await this.dataService.guardarTerrenos(terreno, this.id);
 
       console.log("Terreno con id: " + terreno.id + " creado con éxito");
-      this.router.navigate(["/terrenos"]);
+      //this.router.navigate(["/terrenos"]);
+
+      this.imprimirID = true;
 
     } else{
       console.log("No has rellenado todos los datos del terreno")

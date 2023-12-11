@@ -18,6 +18,7 @@ export class ParcelaCrearComponent {
   tamano:number;
   limites:String = "";
   disponibilidad:boolean = false;
+  imprimirID:boolean = false;
 
 
 
@@ -28,6 +29,7 @@ export class ParcelaCrearComponent {
 
 
   async registrarParcela() {
+    this.imprimirID = false;
 
     //si es latifundio podemos crear la parcela
     if(this.idTerreno / 10000 >= 2){
@@ -39,7 +41,8 @@ export class ParcelaCrearComponent {
         let parcela = new Parcela(this.id, this.idTerreno, this.nParcela, this.latitud, this.longitud, this.tamano, this.limites, this.disponibilidad);
         await this.dataService.guardarParcelas(parcela, this.id);
 
-        this.router.navigate(["/parcelas"]);
+        this.imprimirID = true;
+
       } else{
         console.log("No has rellenado todos los datos de la parcela")
       }

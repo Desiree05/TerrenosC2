@@ -21,17 +21,21 @@ export class AlquilerComponent {
 
   idAlquiler:String; //idParcela + _ + "DNI" + _ + "fechaInicio" (ddmmaaaa)
 
+  imprimirID:boolean=false;
+
   constructor(private dataService:DataServices, private router:Router) {
   }
 
   async registrarAlquiler(){
+
+    this.imprimirID = false;
 
     if(this.idParcela != 0 && this.DNI != "" && this.fechaInicio != "" && this.periodo != "" && this.importe){
       this.idAlquiler = this.idParcela + "_" + this.DNI +  "_" + this.fechaInicio;
       let alquiler = new Alquiler(this.idAlquiler, this.idParcela, this.DNI, this.fechaInicio, this.periodo, this.importe);
 
       await this.dataService.guardarAlquiler(alquiler, this.idAlquiler);
-      this.router.navigate(["/"]);
+      this.imprimirID = true;
     } else{
       console.log("No has rellenado todos los datos del alquiler o los datos son incorrectos")
     }

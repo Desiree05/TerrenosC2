@@ -15,6 +15,7 @@ export class ArrendatarioCrearComponent {
   apellido:String;
   email:String;
   edad:number;
+  imprimirID:boolean=false;
 
 
 
@@ -24,12 +25,15 @@ export class ArrendatarioCrearComponent {
 
   async registrarArrendatarios(){
 
+    this.imprimirID = false;
+
     if(this.edad >= 18 && this.DNI != "" && this.nombre != "" && this.apellido != "" && this.email != ""){
       let arrendatario = new Arrendatario(this.DNI, this.nombre, this.apellido, this.email, this.edad);
       await this.dataService.guardarArrendatarios(arrendatario, this.DNI);
 
       console.log("Arrendatario con DNI: " + arrendatario.DNI + " creado con éxito");
-      this.router.navigate(["/arrendatarios"]);
+      this.imprimirID = true;
+
     } else{
       console.log("Rellene los campos adecuadamente. Edad: " + this.edad + " debe de ser mayor o igual a 18.");
     }
