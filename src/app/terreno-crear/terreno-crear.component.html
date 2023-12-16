@@ -5,37 +5,85 @@
     <h2>Crear Terreno</h2>
   </div>
 
-
-
-  <form class="w3-container w3-margin">
+  <form name="formulario" [formGroup]="formulario" (ngSubmit)="submitForm()" class="w3-container w3-margin">
 
     <label class="w3-text-black"><b>Ubicación (coordenadas)</b></label>
 
     <div class="w3-row-padding">
       <div class="w3-half">
-        <input id="latitud" class="w3-input w3-border" required="required" type="number" name="latitud" placeholder="Latitud" [(ngModel)]="latitud">
+
+        <span *ngIf="
+          (formulario.get('latitud')?.hasError('required') || formulario.get('latitud')?.hasError('pattern') ) &&
+          (formulario.get('latitud')?.dirty ||
+          formulario.get('latitud')?.touched ||
+          isSubmitted)"
+          class="error"
+        > Necesitas poner la latitud en coordenadas (1,23456)
+        </span>
+
+        <input id="latitud" formControlName="latitud" class="w3-input"
+               type="number" name="latitud" placeholder="Latitud" [(ngModel)]="latitud"
+               [ngClass]="{'invalid-input':formulario.get('latitud')?.invalid && (formulario.get('latitud')?.dirty || formulario.get('latitud')?.touched || isSubmitted)}"
+        >
+
       </div>
       <div class="w3-half">
-        <input id="longitud" class="w3-input w3-border" required="required" type="number" name="longitud" placeholder="Longitud" [(ngModel)]="longitud">
+
+        <span *ngIf="
+          (formulario.get('longitud')?.hasError('required') || formulario.get('longitud')?.hasError('pattern') ) &&
+          (formulario.get('longitud')?.dirty ||
+          formulario.get('longitud')?.touched ||
+          isSubmitted)"
+                      class="error"
+                > Necesitas poner la longitud en coordenadas (1,23456)
+        </span>
+
+        <input id="longitud" formControlName="longitud" class="w3-input" type="number" name="longitud" placeholder="Longitud" [(ngModel)]="longitud"
+               [ngClass]="{'invalid-input':formulario.get('longitud')?.invalid && (formulario.get('longitud')?.dirty || formulario.get('longitud')?.touched || isSubmitted)}"
+        >
       </div>
     </div>
 
 
     <label class="w3-text-black"><b>Tamaño (hectáreas)</b></label>
-    <input id="tamano" class="w3-input w3-border w3-light-grey" required="required" name="tamano" type="number" [(ngModel)]="tamano">
+
+    <span *ngIf="
+          (formulario.get('tamano')?.hasError('required') || formulario.get('tamano')?.hasError('min'))&&
+          (formulario.get('tamano')?.dirty ||
+          formulario.get('tamano')?.touched ||
+          isSubmitted)"
+          class="error"
+    > El tamaño debe ser positivo
+        </span>
+
+    <input id="tamano" class="w3-input" formControlName="tamano" name="tamano" type="number" [(ngModel)]="tamano"
+           [ngClass]="{'invalid-input':formulario.get('tamano')?.invalid && (formulario.get('tamano')?.dirty || formulario.get('tamano')?.touched || isSubmitted)}"
+    >
 
 
     <label class="w3-text-black"><b>Límites (descripción)</b></label>
 
     <div class="w3-row-padding">
-      <input id="limite_x" class="w3-input w3-border" required="required" name="limites" type="text" placeholder="Un rio, un camino, etc." [(ngModel)]="limites">
+
+      <span *ngIf="
+          formulario.get('limites')?.hasError('required') &&
+          (formulario.get('limites')?.dirty ||
+          formulario.get('limites')?.touched ||
+          isSubmitted)"
+                    class="error"
+              > Necesitas poner los límites del terreno  (máximo 100 caracteres)
+      </span>
+
+      <input id="limite_x" class="w3-input" formControlName="limites" name="limites" type="text" placeholder="Un rio, un camino, etc." [(ngModel)]="limites"
+             [ngClass]="{'invalid-input':formulario.get('limites')?.invalid && (formulario.get('limites')?.dirty || formulario.get('limites')?.touched || isSubmitted)}"
+      >
     </div>
 
 
-    <input id="boton_finca" class="w3-radio w3-margin" type="radio" name="tipo" value="finca" [(ngModel)]="esFinca">
+    <input id="boton_finca" class="w3-radio w3-margin" formControlName="boton_finca" type="radio" name="boton_finca" value="finca" [(ngModel)]="esFinca">
     <label>Finca</label>
 
-    <input id="boton_latifundio" class="w3-radio w3-margin" type="radio" name="tipo" value="latifundio" [(ngModel)]="esLatifundio">
+    <input id="boton_latifundio" class="w3-radio w3-margin" formControlName="boton_latifundio" type="radio" name="boton_latifundio" value="latifundio" [(ngModel)]="esLatifundio">
     <label>Latifundio</label>
 
     <br>

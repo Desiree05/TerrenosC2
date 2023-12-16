@@ -7,27 +7,79 @@
 
 
 
-<form class="w3-container w3-margin">
+<form class="w3-container w3-margin" [formGroup]="formulario" (ngSubmit)="submitForm()">
 
-  <label class="w3-text-black"><b>DNI (con letra)</b></label>
-  <input id="DNI" class="w3-input w3-border w3-light-grey" required="required" name="DNI" type="text" [(ngModel)]="DNI">
+  <label class="w3-text-black"><b>DNI</b></label>
+
+  <span *ngIf="
+          (formulario.get('DNI')?.hasError('required') || formulario.get('DNI')?.hasError('pattern')) &&
+          (formulario.get('DNI')?.dirty ||
+          formulario.get('DNI')?.touched ||
+          isSubmitted)"
+        class="error"
+  > Necesitas poner un DNI con letra
+      </span>
+
+  <input id="DNI" formControlName="DNI" class="w3-input" required="required" name="DNI" type="text" [(ngModel)]="DNI"
+         [ngClass]="{'invalid-input':formulario.get('DNI')?.invalid && (formulario.get('DNI')?.dirty || formulario.get('DNI')?.touched || isSubmitted)}"
+  >
 
   <div class="w3-row-padding">
     <div class="w3-half">
       <label class="w3-text-black"><b>Nombre</b></label>
-      <input id="nombre" class="w3-input w3-border" required="required" type="text" name="nombre" placeholder="Nombre" [(ngModel)]="nombre">
+      <span *ngIf="
+          (formulario.get('nombre')?.hasError('required') || formulario.get('nombre')?.hasError('pattern')) &&
+          (formulario.get('nombre')?.dirty ||
+          formulario.get('nombre')?.touched ||
+          isSubmitted)"
+            class="error"
+      > Necesitas poner nombres con letras del alfabeto
+      </span>
+      <input id="nombre" formControlName="nombre" class="w3-input w3-border" required="required" type="text" name="nombre" placeholder="Nombre" [(ngModel)]="nombre"
+             [ngClass]="{'invalid-input':formulario.get('nombre')?.invalid && (formulario.get('nombre')?.dirty || formulario.get('nombre')?.touched || isSubmitted)}"
+      >
     </div>
     <div class="w3-half">
       <label class="w3-text-black"><b>Apellidos</b></label>
-      <input id="apellidos" class="w3-input w3-border" required="required" type="text" name="apellidos" placeholder="Apellidos" [(ngModel)]="apellido">
+      <span *ngIf="
+          (formulario.get('apellido')?.hasError('required') || formulario.get('apellido')?.hasError('pattern')) &&
+          (formulario.get('apellido')?.dirty ||
+          formulario.get('apellido')?.touched ||
+          isSubmitted)"
+            class="error"
+      > Necesitas poner apellidos con letras del alfabeto
+      </span>
+      <input id="apellidos" formControlName="apellido" class="w3-input w3-border" required="required" type="text" name="apellidos" placeholder="Apellidos" [(ngModel)]="apellido"
+             [ngClass]="{'invalid-input':formulario.get('apellido')?.invalid && (formulario.get('apellido')?.dirty || formulario.get('apellido')?.touched || isSubmitted)}"
+      >
     </div>
   </div>
 
   <label class="w3-text-black"><b>Correo electrónico</b></label>
-  <input id="email" class="w3-input w3-border w3-light-grey" required="required" name="email" type="text" [(ngModel)]="email">
+  <span *ngIf="
+          (formulario.get('email')?.hasError('required') || formulario.get('email')?.hasError('email')) &&
+          (formulario.get('email')?.dirty ||
+          formulario.get('email')?.touched ||
+          isSubmitted)"
+        class="error"
+  > Necesitas poner un email válido (abc@example.com)
+      </span>
+  <input id="email" formControlName="email" class="w3-input" required="required" name="email" type="email" [(ngModel)]="email"
+         [ngClass]="{'invalid-input':formulario.get('email')?.invalid && (formulario.get('email')?.dirty || formulario.get('email')?.touched || isSubmitted)}"
+  >
 
-  <label class="w3-text-black"><b>Edad (debes de ser mayor de edad)</b></label>
-  <input id="edad" class="w3-input w3-border w3-light-grey" required="required" name="edad" type="number" [(ngModel)]="edad">
+  <label class="w3-text-black"><b>Edad</b></label>
+  <span *ngIf="
+          (formulario.get('edad')?.hasError('required') || formulario.get('edad')?.hasError('min')) &&
+          (formulario.get('edad')?.dirty ||
+          formulario.get('edad')?.touched ||
+          isSubmitted)"
+        class="error"
+  > Necesitas ser mayor de edad (>18)
+      </span>
+  <input id="edad" formControlName="edad" class="w3-input" required="required" name="edad" type="number" [(ngModel)]="edad"
+         [ngClass]="{'invalid-input':formulario.get('edad')?.invalid && (formulario.get('edad')?.dirty || formulario.get('edad')?.touched || isSubmitted)}"
+  >
 
 
   <br>

@@ -6,33 +6,89 @@
 </div>
 
 
-<form class="w3-container w3-margin">
+<form class="w3-container w3-margin" [formGroup]="formulario" (ngSubmit)="submitForm()">
 
   <label class="w3-text-black"><b>DNI del arrendatario (con letra)</b></label>
-  <input id="DNI" class="w3-input w3-border w3-light-grey" required="required" name="DNI" type="text" [(ngModel)]="DNI">
+  <span *ngIf="
+          (formulario.get('DNI')?.hasError('required') || formulario.get('DNI')?.hasError('pattern')) &&
+          (formulario.get('DNI')?.dirty ||
+          formulario.get('DNI')?.touched ||
+          isSubmitted)"
+        class="error"
+  > Necesitas poner un DNI con letra
+      </span>
+  <span *ngIf="!encontradoArrendatario && isSubmitted">
+        Este DNI no está registrado como arrendatario.
+      </span>
+  <input id="DNI" class="w3-input" formControlName="DNI" required="required" name="DNI" type="text" [(ngModel)]="DNI"
+         [ngClass]="{'invalid-input':formulario.get('DNI')?.invalid && (formulario.get('DNI')?.dirty || formulario.get('DNI')?.touched || isSubmitted)}"
+  >
 
   <br>
 
   <label class="w3-text-black"><b>Id de la parcela a alquilar</b></label>
-  <input id="input_id" class="w3-input w3-border" type="number" name="texto" placeholder="id de la parcela" [(ngModel)]="idParcela">
+  <span *ngIf="
+          (formulario.get('idParcela')?.hasError('required') || formulario.get('idParcela')?.hasError('pattern')) &&
+          (formulario.get('idParcela')?.dirty ||
+          formulario.get('idParcela')?.touched ||
+          isSubmitted)"
+        class="error"
+  > Necesitas poner un id de parcela (2XXXX9YY)
+      </span>
+  <span *ngIf="!encontradoParcela && isSubmitted">
+        Esta parcela no está registrada.
+      </span>
+  <input id="input_id" class="w3-input" formControlName="idParcela" type="number" name="texto" placeholder="id de la parcela" [(ngModel)]="idParcela"
+         [ngClass]="{'invalid-input':formulario.get('idParcela')?.invalid && (formulario.get('idParcela')?.dirty || formulario.get('idParcela')?.touched || isSubmitted)}"
+  >
 
   <br>
 
   <div class="w3-row-padding">
     <div class="w3-half">
       <label class="w3-text-black"><b>Fecha de inicio del alquiler</b></label>
-      <input id="input_fechaI" class="w3-input w3-border" type="text" name="texto" placeholder="dd-mm-aaaa" [(ngModel)]="fechaInicio">
+      <span *ngIf="
+          (formulario.get('fechaInicio')?.hasError('required') || formulario.get('fechaInicio')?.hasError('pattern')) &&
+          (formulario.get('fechaInicio')?.dirty ||
+          formulario.get('fechaInicio')?.touched ||
+          isSubmitted)"
+            class="error"
+      > Necesitas poner una fecha válida (dd-mm-aa)
+      </span>
+      <input id="input_fechaI" class="w3-input" formControlName="fechaInicio" type="text" name="texto" placeholder="dd-mm-aaaa" [(ngModel)]="fechaInicio"
+             [ngClass]="{'invalid-input':formulario.get('fechaInicio')?.invalid && (formulario.get('fechaInicio')?.dirty || formulario.get('fechaInicio')?.touched || isSubmitted)}"
+      >
     </div>
     <div class="w3-half">
       <label class="w3-text-black"><b>Periodo del alquiler</b></label>
-      <input id="input_periodo" class="w3-input w3-border" type="text" name="texto" placeholder="dd-mm-aaaa" [(ngModel)]="periodo">
+      <span *ngIf="
+          (formulario.get('periodo')?.hasError('required') || formulario.get('periodo')?.hasError('pattern')) &&
+          (formulario.get('periodo')?.dirty ||
+          formulario.get('periodo')?.touched ||
+          isSubmitted)"
+            class="error"
+      > Necesitas poner una fecha válida (dd-mm-aa)
+      </span>
+      <input id="input_periodo" class="w3-input" formControlName="periodo" type="text" name="texto" placeholder="dd-mm-aaaa" [(ngModel)]="periodo"
+             [ngClass]="{'invalid-input':formulario.get('periodo')?.invalid && (formulario.get('periodo')?.dirty || formulario.get('periodo')?.touched || isSubmitted)}"
+      >
     </div>
   </div>
 
   <br>
 
   <label class="w3-text-black"><b>Importe del alquiler mensual (en €)</b></label>
-  <input id="input_importe" class="w3-input w3-border" type="number" name="texto" placeholder="importe" [(ngModel)]="importe">
+  <span *ngIf="
+          (formulario.get('importe')?.hasError('required') || formulario.get('importe')?.hasError('min')) &&
+          (formulario.get('importe')?.dirty ||
+          formulario.get('importe')?.touched ||
+          isSubmitted)"
+        class="error"
+  > Necesitas poner un importe positivo
+      </span>
+  <input id="input_importe" class="w3-input" formControlName="importe" type="number" name="texto" placeholder="importe" [(ngModel)]="importe"
+         [ngClass]="{'invalid-input':formulario.get('importe')?.invalid && (formulario.get('importe')?.dirty || formulario.get('importe')?.touched || isSubmitted)}"
+  >
 
 
   <br>

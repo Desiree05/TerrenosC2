@@ -1,0 +1,12 @@
+input{
+  border: lightgrey 1px solid;
+}
+
+.invalid-input{
+  border: red 2px solid;
+  background-color: #ffacab;
+}
+
+span{
+  color: red;
+}

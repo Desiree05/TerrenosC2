@@ -4,11 +4,32 @@
   <h2>Generar Informe</h2>
 </div>
 
+
+
 <div class="w3-margin">
-  <input id="input_id" class="w3-input w3-margin w3-half" type="text" name="texto" placeholder="DNI del arrendatario" [(ngModel)]="searchDNI">
+  <span *ngIf="
+          (formulario.get('DNI')?.hasError('required') || formulario.get('DNI')?.hasError('pattern')) &&
+          (formulario.get('DNI')?.dirty ||
+          formulario.get('DNI')?.touched ||
+          isSubmitted)"
+        class="error w3-margin"
+  > Necesitas poner un DNI con letra
+      </span>
+
+  <span *ngIf="!encontrado && isSubmitted" class="error w3-margin">
+        Este DNI no está registrado como arrendatario.
+      </span>
+  <form [formGroup]="formulario" (ngSubmit)="submitForm()">
+
+    <input id="input_id" formControlName="DNI" class="w3-input w3-margin w3-half" type="text" name="texto" placeholder="DNI del arrendatario" [(ngModel)]="searchDNI"
+           [ngClass]="{'invalid-input':formulario.get('DNI')?.invalid && (formulario.get('DNI')?.dirty || formulario.get('DNI')?.touched || isSubmitted)}"
+    >
+
+    <button id="botonConsultar" class="w3-btn w3-hover-green w3-blue-grey w3-margin w3-left" (click)="consultarArrendatario()">Buscar Arrendatario</button>
+
+  </form>
 
 
-  <button id="botonConsultar" class="w3-btn w3-hover-green w3-blue-grey w3-margin w3-left" (click)="consultarArrendatario()">Buscar Arrendatario</button>
 
   <br>
   <br>

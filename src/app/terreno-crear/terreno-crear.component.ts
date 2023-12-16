@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {getLocaleTimeFormat} from "@angular/common";
 import {Terreno} from "../classTerreno.model";
 import {DataServices} from "../data.services";
 import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-terreno-crear',
   templateUrl: './terreno-crear.component.html',
   styleUrls: ['./terreno-crear.component.css']
 })
-export class TerrenoCrearComponent{
+export class TerrenoCrearComponent implements OnInit{
 
   esFinca:boolean = false;
   esLatifundio:boolean = false;
@@ -24,10 +24,23 @@ export class TerrenoCrearComponent{
 
   terrenos:Terreno[];
 
+  formulario: FormGroup;
+  isSubmitted:boolean=false;
+
   constructor(private dataService:DataServices, private router:Router) {
   }
 
+  ngOnInit(){
+    this.formulario = new FormGroup({
+      latitud: new FormControl(this.latitud, [Validators.required, Validators.pattern(/^-?[1-9]\d{0,2}(,\d{3})*(?:\.\d{1,5})?$/)]),
+      longitud: new FormControl(this.longitud, [Validators.required, Validators.pattern(/^-?[1-9]\d{0,2}(,\d{3})*(?:\.\d{1,5})?$/)]),
+      tamano: new FormControl(this.tamano, [Validators.required, Validators.min(0)]),
+      limites: new FormControl(this.limites, [Validators.required, Validators.maxLength(100)]),
 
+      boton_finca: new FormControl(null),
+      boton_latifundio: new FormControl(null),
+    });
+  }
 
 
   async registrarTerreno() {
@@ -62,12 +75,19 @@ export class TerrenoCrearComponent{
       this.imprimirID = true;
 
     } else{
-      console.log("No has rellenado todos los datos del terreno")
+      console.log("No has rellenado todos los datos del terreno o son incorrectos");
     }
 
     this.esFinca = false;
     this.esLatifundio = false;
+    this.formulario.updateValueAndValidity();
 
+  }
+
+  submitForm(){
+    //console.log('submitted form', this.formulario.value, this.formulario.invalid);
+    //console.log(this.formulario.errors);
+    this.isSubmitted=true;
   }
 
 

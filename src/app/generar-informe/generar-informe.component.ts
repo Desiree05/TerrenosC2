@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataServices} from "../data.services";
 import {Alquiler} from "../classAlquiler.model";
 import {Arrendatario} from "../classArrendatario.model";
 import {ThisReceiver} from "@angular/compiler";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-generar-informe',
   templateUrl: './generar-informe.component.html',
   styleUrls: ['./generar-informe.component.css']
 })
-export class GenerarInformeComponent {
+export class GenerarInformeComponent implements OnInit{
 
 
   searchDNI:String;
@@ -20,8 +21,18 @@ export class GenerarInformeComponent {
   encontrado:boolean;
   alquileresEncontrado:boolean;
 
+  formulario:FormGroup;
+  isSubmitted:boolean=false;
+
+
   constructor(private dataService:DataServices) {
 
+  }
+
+  ngOnInit(){
+    this.formulario = new FormGroup({
+      DNI: new FormControl(this.searchDNI, [Validators.required, Validators.pattern(/^\d{8}[A-Z]$/)]),
+      });
   }
 
   //print datos del arrendatario (DNI, nombre, apellidos)
@@ -43,12 +54,17 @@ export class GenerarInformeComponent {
       if (this.arrendatarios[index].DNI == this.searchDNI) {
         this.encontrado = true;
         this.arrendatarioEncontrado = this.arrendatarios[index];
-        }
+
       }
+    }
 
     if (!this.encontrado) {
+      console.log("Arrendatario no: ", this.searchDNI);
       console.log("No existe arrendatario con ese DNI");
+    } else{
+      console.log("Arrendatario sí: ", this.searchDNI);
     }
+
 
 
   }
@@ -75,6 +91,10 @@ export class GenerarInformeComponent {
 
     }
 
+  }
+
+  submitForm(){
+    this.isSubmitted = true;
   }
 
 }

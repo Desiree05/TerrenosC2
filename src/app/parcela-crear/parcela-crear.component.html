@@ -5,39 +5,114 @@
 
 
 
-<form class="w3-container w3-margin">
+<form [formGroup]="formulario" (ngSubmit)="submitForm()" class="w3-container w3-margin">
 
   <label class="w3-text-black"><b>Datos respecto al terreno al que pertenece la parcela a crear</b></label>
 
   <div class="w3-row-padding">
     <div class="w3-half">
-      <input id="idTerreno" class="w3-input w3-border" required="required" type="number" name="idTerreno" placeholder="Id del Terreno al que pertenece" [(ngModel)]="idTerreno">
+
+      <span *ngIf="
+          (formulario.get('idTerreno')?.hasError('required') || formulario.get('idTerreno')?.hasError('pattern')) &&
+          (formulario.get('idTerreno')?.dirty ||
+          formulario.get('idTerreno')?.touched ||
+          isSubmitted)"
+            class="error"
+      > Necesitas poner el id del terreno (2XXXX, debe ser un latifundio)
+      </span>
+
+      <span *ngIf="!encontradoTerreno && isSubmitted">
+        Este terreno no está registrado.
+      </span>
+
+      <input id="idTerreno" class="w3-input w3-border" formControlName="idTerreno" required="required" type="number" name="idTerreno" placeholder="Id del Terreno al que pertenece" [(ngModel)]="idTerreno"
+             [ngClass]="{'invalid-input':formulario.get('idTerreno')?.invalid && (formulario.get('idTerreno')?.dirty || formulario.get('idTerreno')?.touched || isSubmitted)}"
+      >
     </div>
     <div class="w3-half">
-      <input id="nParcela" class="w3-input w3-border" required="required" type="number" name="nParcela" placeholder="Número de la parcela" [(ngModel)]="nParcela">
+
+        <span *ngIf="
+          (formulario.get('nParcela')?.hasError('required') || formulario.get('nParcela')?.hasError('min') || formulario.get('nParcela')?.hasError('max')) &&
+          (formulario.get('nParcela')?.dirty ||
+          formulario.get('nParcela')?.touched ||
+          isSubmitted)"
+              class="error"
+        > Necesitas poner el número de la parcela (entre 1 y 99)
+      </span>
+
+      <input id="nParcela" class="w3-input w3-border" formControlName="nParcela" required="required" type="number" name="nParcela" placeholder="Número de la parcela" [(ngModel)]="nParcela"
+             [ngClass]="{'invalid-input':formulario.get('nParcela')?.invalid && (formulario.get('nParcela')?.dirty || formulario.get('nParcela')?.touched || isSubmitted)}"
+      >
     </div>
   </div>
 
   <label class="w3-text-black"><b>Ubicación (coordenadas)</b></label>
 
   <div class="w3-row-padding">
+    <span *ngIf="
+          (formulario.get('latitud')?.hasError('required') || formulario.get('latitud')?.hasError('pattern') ) &&
+          (formulario.get('latitud')?.dirty ||
+          formulario.get('latitud')?.touched ||
+          isSubmitted)"
+          class="error"
+    > Necesitas poner la latitud en coordenadas (1,23456)
+        </span>
     <div class="w3-half">
-      <input id="latitud" class="w3-input w3-border" required="required" type="number" name="latitud" placeholder="Latitud" [(ngModel)]="latitud">
+      <input id="latitud" formControlName="latitud" class="w3-input"
+             type="number" name="latitud" placeholder="Latitud" [(ngModel)]="latitud"
+             [ngClass]="{'invalid-input':formulario.get('latitud')?.invalid && (formulario.get('latitud')?.dirty || formulario.get('latitud')?.touched || isSubmitted)}"
+      >
     </div>
+    <span *ngIf="
+          (formulario.get('longitud')?.hasError('required') || formulario.get('longitud')?.hasError('pattern') ) &&
+          (formulario.get('longitud')?.dirty ||
+          formulario.get('longitud')?.touched ||
+          isSubmitted)"
+          class="error"
+    > Necesitas poner la longitud en coordenadas (1,23456)
+        </span>
     <div class="w3-half">
-      <input id="longitud" class="w3-input w3-border" required="required" type="number" name="longitud" placeholder="Longitud" [(ngModel)]="longitud">
+      <input id="longitud" formControlName="longitud" class="w3-input" type="number" name="longitud" placeholder="Longitud" [(ngModel)]="longitud"
+             [ngClass]="{'invalid-input':formulario.get('longitud')?.invalid && (formulario.get('longitud')?.dirty || formulario.get('longitud')?.touched || isSubmitted)}"
+      >
     </div>
   </div>
 
 
   <label class="w3-text-black"><b>Tamaño (hectáreas)</b></label>
-  <input id="tamano" class="w3-input w3-border w3-light-grey" required="required" name="tamano" type="number" [(ngModel)]="tamano">
+  <span *ngIf="
+          (formulario.get('tamano')?.hasError('required') || formulario.get('tamano')?.hasError('min'))&&
+          (formulario.get('tamano')?.dirty ||
+          formulario.get('tamano')?.touched ||
+          isSubmitted)"
+        class="error"
+  > El tamaño debe ser positivo
+        </span>
+
+  <span *ngIf="tamanoIncorrecto">
+    La parcela no puede ser más grande que el terreno al que está asociada
+  </span>
+
+  <input id="tamano" formControlName="tamano" class="w3-input" required="required" name="tamano" type="number" [(ngModel)]="tamano"
+         [ngClass]="{'invalid-input':formulario.get('tamano')?.invalid && (formulario.get('tamano')?.dirty || formulario.get('tamano')?.touched || isSubmitted)}"
+  >
 
 
   <label class="w3-text-black"><b>Límites (descripción)</b></label>
 
+  <span *ngIf="
+          (formulario.get('limites')?.hasError('required') || formulario.get('limites')?.hasError('maxLength') ) &&
+          (formulario.get('limites')?.dirty ||
+          formulario.get('limites')?.touched ||
+          isSubmitted)"
+        class="error"
+  > Necesitas poner los límites del terreno (máximo 100 caracteres)
+      </span>
+
   <div class="w3-row-padding">
-    <input id="limite_x" class="w3-input w3-border" required="required" name="limites" type="text" placeholder="Un rio, un camino, etc." [(ngModel)]="limites">
+    <input id="limite_x" formControlName="limites" class="w3-input" required="required" name="limites" type="text" placeholder="Un rio, un camino, etc." [(ngModel)]="limites"
+           [ngClass]="{'invalid-input':formulario.get('limites')?.invalid && (formulario.get('limites')?.dirty || formulario.get('limites')?.touched || isSubmitted)}"
+    >
   </div>
 
 
