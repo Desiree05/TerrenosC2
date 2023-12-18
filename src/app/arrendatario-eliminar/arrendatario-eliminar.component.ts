@@ -25,11 +25,26 @@ export class ArrendatarioEliminarComponent {
 
   async eliminarArrendatario() {
 
-    try {
-     await this.dataService.eliminarArrendatarios(this.DNI);
-    } catch (e) {
-      console.log("No se ha encontrado ese arrendatario con DNI " + this.DNI);
+    this.encontrado = false;
+
+    (await this.dataService.cargarArrendatarios()).subscribe(
+      arrendatarios => {
+        this.arrendatarios = Object.values(arrendatarios);
+      });
+
+    let index: number;
+    for (index = 0; index < this.arrendatarios.length && !this.encontrado; index++) {
+      if (this.arrendatarios[index].DNI == this.DNI) {
+        this.encontrado = true;
+      }
     }
+
+    if (this.encontrado) {
+      await this.dataService.eliminarArrendatarios(this.DNI);
+    } else {
+      console.log("No existe arrendatario con ese DNI");
+    }
+
 
   }
 
